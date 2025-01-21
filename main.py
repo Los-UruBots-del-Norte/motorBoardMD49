@@ -38,9 +38,9 @@ try:
     else:
         print("No se pudo establecer la velocidad del motor 1.")
         
-    # Establecer una velocidad para el motor 2 (por ejemplo, -128 en modo signed)
-    if motor_board.SetSpeed2(-128):
-        print("Velocidad del motor 2 establecida a -128.")
+    # Establecer una velocidad para el motor 2 llamado a la función set_speed_2_turn
+    if motor_board.set_speed_2_turn(128):
+        print("Velocidad del motor 2 establecida a 128.")
     else:
         print("No se pudo establecer la velocidad del motor 2.")
 
