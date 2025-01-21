@@ -105,32 +105,24 @@ class MotorBoardMD49:
         return False
     
     def set_speed_2_turn(self, value: int) -> bool:
-        """
-        Establece la velocidad de giro del motor en función del modo.
-        """
-        if self._mode in [0, 2]:  # Modo sin signo
+        if self._mode in [0, 2]:
             if 0 <= value <= 255:
-                fmt = 'B'  # Unsigned byte
+                fmt = 'B'
             else:
                 print("Value out of range (0-255) for mode 0 or 2")
                 return False
-        else:  # Modo con signo
+        else:
             if -128 <= value <= 127:
-                fmt = 'b'  # Signed byte
+                fmt = 'b'
             else:
                 print("Value out of range (-128 to 127) for mode other than 0 or 2")
                 return False
 
-        # Enviar el comando con el valor empaquetado
-        return self._txCmd(MotorBoardMD49.SET_SPEED_2_TURN, pack(fmt, value))
+        return self._txCmd(MotorBoardMD49.SET_SPEED_2_TURN, struct.pack(fmt, value))
 
     def set_acceleration(self, value: int) -> bool:
-        """
-        Establece la aceleración del motor (valor entre 1 y 10).
-        """
         if 1 <= value <= 10:
-            # Enviar el comando con el valor empaquetado
-            return self._txCmd(MotorBoardMD49.SET_ACCELERATION, pack('B', value))
+            return self._txCmd(MotorBoardMD49.SET_ACCELERATION, struct.pack('B', value))
         
         print("Acceleration value must be between 1 and 10")
         return False
